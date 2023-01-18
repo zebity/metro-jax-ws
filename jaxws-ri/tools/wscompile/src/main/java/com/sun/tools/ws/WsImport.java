@@ -11,7 +11,7 @@
 package com.sun.tools.ws;
 
 import com.sun.tools.ws.wscompile.WsimportTool;
-import fence.jaxws.MaintainOnvifGetSetUpperIdentifierNamesUtil;
+// import fence.jaxws.MaintainOnvifGetSetUpperIdentifierNamesUtil;
 
 /**
  * WsImport tool entry point.
@@ -25,7 +25,7 @@ public class WsImport {
      */
 
     /* Force use of "special ONVIF Get/Set (uppercase method names" */
-    static MaintainOnvifGetSetUpperIdentifierNamesUtil force = new MaintainOnvifGetSetUpperIdentifierNamesUtil();
+    // static MaintainOnvifGetSetUpperIdentifierNamesUtil force = new MaintainOnvifGetSetUpperIdentifierNamesUtil();
 
     public static void main(String[] args) throws Throwable {
         System.exit(Invoker.invoke("com.sun.tools.ws.wscompile.WsimportTool", args));

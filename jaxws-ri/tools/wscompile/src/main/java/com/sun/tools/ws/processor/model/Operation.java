@@ -202,6 +202,31 @@ public class Operation extends ModelObject {
     }
 
     public String getJavaMethodName(){
+      String res = null;
+      String from = " mangler: '";
+
+     if (_javaMethod != null) {
+       res = _javaMethod.getName();
+       from = " _javaMethod: '";
+     } else if (customizedName != null) {
+       res = customizedName;
+       from = " customName: '"; 
+     } else {
+       String loc = _name.getLocalPart();
+
+       if (Character.isUpperCase(loc.charAt(0)) || loc.startsWith("Get") || loc.startsWith("Set")) {
+         from = " keep upper: '";
+         res = loc;
+       } else {
+         res = BindingHelper.mangleNameToVariableName(loc);
+       }
+     }
+
+     System.out.println("INFO>> Operation::getJavaMethodName - from " + from + res + "'");
+
+     return res;
+
+/*
         //if JavaMethod is created return the name
         if(_javaMethod != null){
             return _javaMethod.getName();
@@ -212,7 +237,7 @@ public class Operation extends ModelObject {
             return customizedName;
         }
 
-        return BindingHelper.mangleNameToVariableName(_name.getLocalPart());
+        return BindingHelper.mangleNameToVariableName(_name.getLocalPart()); */
     }
 
     public com.sun.tools.ws.wsdl.document.Operation getWSDLPortTypeOperation(){
