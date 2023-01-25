@@ -62,11 +62,11 @@
             <artifactId>jaxb-xjc</artifactId>
         </dependency>
 
-        <dependency>
+        <!-- dependency>
             <groupId>onvif-relay</groupId>
             <artifactId>onvif-naming</artifactId>
             <version>0.0.1</version>
-        </dependency>
+        </dependency -->
 
         <dependency>
             <groupId>org.apache.ant</groupId>
