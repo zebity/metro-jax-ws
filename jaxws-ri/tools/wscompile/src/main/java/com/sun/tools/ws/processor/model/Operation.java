@@ -26,6 +26,7 @@ import java.util.Set;
  * @author WS Development Team
  */
 public class Operation extends ModelObject {
+    private boolean USE_NAME_HACK = true;
 
     public Operation(Entity entity) {
         super(entity);
@@ -33,6 +34,7 @@ public class Operation extends ModelObject {
 
     public Operation(Operation operation, Entity entity){
         this(operation._name, entity);
+    private boolean USE_NAME_HACK = true;
         this._style = operation._style;
         this._use = operation._use;
         this.customizedName = operation.customizedName;
@@ -202,16 +204,17 @@ public class Operation extends ModelObject {
     }
 
     public String getJavaMethodName(){
+     if (USE_NAME_HACK) {
       String res = null;
       String from = " mangler: '";
 
      if (_javaMethod != null) {
        res = _javaMethod.getName();
        from = " _javaMethod: '";
-     } else if (customizedName != null) {
+      } else if (customizedName != null) {
        res = customizedName;
        from = " customName: '"; 
-     } else {
+      } else {
        String loc = _name.getLocalPart();
 
        if (Character.isUpperCase(loc.charAt(0)) || loc.startsWith("Get") || loc.startsWith("Set")) {
@@ -220,13 +223,12 @@ public class Operation extends ModelObject {
        } else {
          res = BindingHelper.mangleNameToVariableName(loc);
        }
-     }
+      }
 
-     System.out.println("INFO>> Operation::getJavaMethodName - from " + from + res + "'");
+      System.out.println("INFO>> Operation::getJavaMethodName - from " + from + res + "'");
 
-     return res;
-
-/*
+      return res;
+     } else {
         //if JavaMethod is created return the name
         if(_javaMethod != null){
             return _javaMethod.getName();
@@ -237,7 +239,8 @@ public class Operation extends ModelObject {
             return customizedName;
         }
 
-        return BindingHelper.mangleNameToVariableName(_name.getLocalPart()); */
+        return BindingHelper.mangleNameToVariableName(_name.getLocalPart()); 
+     }
     }
 
     public com.sun.tools.ws.wsdl.document.Operation getWSDLPortTypeOperation(){
