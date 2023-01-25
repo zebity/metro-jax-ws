@@ -34,7 +34,6 @@ public class Operation extends ModelObject {
 
     public Operation(Operation operation, Entity entity){
         this(operation._name, entity);
-    private boolean USE_NAME_HACK = true;
         this._style = operation._style;
         this._use = operation._use;
         this.customizedName = operation.customizedName;
@@ -208,7 +207,7 @@ public class Operation extends ModelObject {
       String res = null;
       String from = " mangler: '";
 
-     if (_javaMethod != null) {
+      if (_javaMethod != null) {
        res = _javaMethod.getName();
        from = " _javaMethod: '";
       } else if (customizedName != null) {
